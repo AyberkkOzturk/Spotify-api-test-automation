@@ -10,8 +10,8 @@ public class RestResource {
 
     public static Response post (String path, String token,Object requestPlaylist) {
         return given(getRequestSpec())
-                .header("Authorization","Bearer " + token)
                 .body(requestPlaylist)
+                .auth().oauth2(token)
                 .when()
                 .post(path)
                 .then()
@@ -33,7 +33,7 @@ public class RestResource {
 
     public static Response get (String path,String token) {
         return given(getRequestSpec())
-                .header("Authorization","Bearer " + token)
+                .auth().oauth2(token)
                 .when()
                 .get(path)
                 .then()
@@ -44,7 +44,7 @@ public class RestResource {
     public static Response update(String path,String token,Object requestPlaylist) {
         return given(getRequestSpec())
                 .body(requestPlaylist)
-                .header("Authorization","Bearer " + token)
+                .auth().oauth2(token)
                 .when()
                 .put(path)
                 .then()
